@@ -3,7 +3,7 @@ from PIL import Image
 import base64
 
 # ------------------ PAGE SETTINGS ------------------
-st.set_page_config(layout="wide", page_title="Multilingual Page")
+st.set_page_config(layout="wide", page_title="VR Cycling")
 
 # ------------------ FUNCTIONS ------------------
 def get_base64_of_bin_file(bin_file):
@@ -22,12 +22,12 @@ background_base64 = get_base64_of_bin_file(background_image_path)
 # ------------------ CUSTOM CSS ------------------
 st.markdown(f"""
     <style>
-    /* Set background image with transparency overlay */
-    body {{
-        background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-                          url("data:image/jpg;base64,{background_base64}");
+    /* Full page background */
+    [data-testid="stAppViewContainer"] {{
+        background-image: url("data:image/jpg;base64,{background_base64}");
         background-size: cover;
         background-position: center;
+        background-repeat: no-repeat;
     }}
 
     /* Rounded white box styling for each text section */
@@ -57,6 +57,11 @@ st.markdown(f"""
         display: flex;
         justify-content: center;
         align-items: center;
+    }}
+
+    /* Make container transparent to see background */
+    .stApp {{
+        background: transparent;
     }}
     </style>
 """, unsafe_allow_html=True)
@@ -91,6 +96,6 @@ with col2:
     )
 
     st.markdown('<div class="center-img">', unsafe_allow_html=True)
-    flag_img = Image.open(circle_image_path)
-    st.image(flag_img, caption="Sri Lanka Flag", use_container_width=True)
+    circle_img = Image.open(circle_image_path)
+    st.image(circle_img, caption="Sri Lanka Flag", use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
