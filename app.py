@@ -98,5 +98,5 @@ with col2:
 
     st.markdown('<div class="center-img">', unsafe_allow_html=True)
     circle_img = Image.open(circle_image_path)
-    st.image(circle_img, caption="Sri Lanka Flag", width=150)
+    st.image(circle_img, caption="Sri Lanka Flag", width=1000)
     st.markdown('</div>', unsafe_allow_html=True)
