@@ -35,8 +35,9 @@ st.markdown(f"""
         background-color: rgba(255, 255, 255, 0.8);
         padding: 20px 25px;
         border-radius: 15px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         margin-bottom: 20px;
+        color: #000000
     }}
 
     /* Headings style */
@@ -49,7 +50,7 @@ st.markdown(f"""
         padding: 10px 15px;
         text-align: center;
         margin-bottom: 15px;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
     }}
 
     /* Center image */
@@ -71,7 +72,7 @@ col1, col2 = st.columns(2)
 
 # ---------- LEFT HALF ----------
 with col1:
-    st.markdown('<div class="subheader">🗣 Multilingual Paragraphs</div>', unsafe_allow_html=True)
+    st.markdown('<div class="subheader">🗣 VR Cycling</div>', unsafe_allow_html=True)
 
     paragraph_en = """This is a sample paragraph in English. 
     It represents the same content translated into different languages."""
@@ -97,5 +98,5 @@ with col2:
 
     st.markdown('<div class="center-img">', unsafe_allow_html=True)
     circle_img = Image.open(circle_image_path)
-    st.image(circle_img, caption="Sri Lanka Flag", use_container_width=True)
+    st.image(circle_img, caption="Sri Lanka Flag", width=150)
     st.markdown('</div>', unsafe_allow_html=True)
