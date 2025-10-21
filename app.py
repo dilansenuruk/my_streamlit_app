@@ -72,7 +72,7 @@ col1, col2 = st.columns(2)
 
 # ---------- LEFT HALF ----------
 with col1:
-    st.markdown('<div class="subheader">🗣 VR Cycling</div>', unsafe_allow_html=True)
+    st.markdown('<div class="subheader">🚴 VR Cycling</div>', unsafe_allow_html=True)
 
     paragraph_en = """This is a sample paragraph in English. 
     It represents the same content translated into different languages."""
@@ -89,7 +89,7 @@ with col1:
 
 # ---------- RIGHT HALF ----------
 with col2:
-    st.markdown('<div class="subheader">📄 About This Section</div>', unsafe_allow_html=True)
+    st.markdown('<div class="subheader">About This Section</div>', unsafe_allow_html=True)
 
     st.markdown(
         '<div class="box">This section displays some text at the top and an image below it.</div>',
@@ -98,5 +98,5 @@ with col2:
 
     st.markdown('<div class="center-img">', unsafe_allow_html=True)
     circle_img = Image.open(circle_image_path)
-    st.image(circle_img, caption="Sri Lanka Flag", width=1000)
+    st.image(circle_img, caption="Sri Lanka Flag", width=300)
     st.markdown('</div>', unsafe_allow_html=True)
