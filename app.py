@@ -1,22 +1,31 @@
 import streamlit as st
 from PIL import Image
-import os
+import base64
 
 # ------------------ PAGE SETTINGS ------------------
 st.set_page_config(layout="wide", page_title="Multilingual Page")
 
+# ------------------ FUNCTIONS ------------------
+def get_base64_of_bin_file(bin_file):
+    """Convert local image file to base64 string"""
+    with open(bin_file, "rb") as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
 # ------------------ IMAGE FILES ------------------
-# Make sure the images are in the 'images' folder
-background_image = "images/background.jpg"
-circle_image = "images/circle.png"
+background_image_path = "images/background.jpg"
+circle_image_path = "images/circle.png"
+
+# Encode background image as base64
+background_base64 = get_base64_of_bin_file(background_image_path)
 
 # ------------------ CUSTOM CSS ------------------
 st.markdown(f"""
     <style>
     /* Set background image with transparency overlay */
     body {{
-        background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
-                          url("{background_image}");
+        background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+                          url("data:image/jpg;base64,{background_base64}");
         background-size: cover;
         background-position: center;
     }}
@@ -82,6 +91,6 @@ with col2:
     )
 
     st.markdown('<div class="center-img">', unsafe_allow_html=True)
-    img = Image.open(circle_image)
-    st.image(img, caption="Sri Lanka Flag", use_container_width=True)
+    flag_img = Image.open(circle_image_path)
+    st.image(flag_img, caption="Sri Lanka Flag", use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
