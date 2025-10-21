@@ -96,7 +96,7 @@ with col2:
         unsafe_allow_html=True
     )
 
-    st.markdown('<div class="center-img">', unsafe_allow_html=True)
-    circle_img = Image.open(circle_image_path)
-    st.image(circle_img, caption="Sri Lanka Flag", width=300)
-    st.markdown('</div>', unsafe_allow_html=True)
+    # st.markdown('<div class="center-img">', unsafe_allow_html=True)
+    # circle_img = Image.open(circle_image_path)
+    # st.image(circle_img, caption="Sri Lanka Flag", width=300)
+    # st.markdown('</div>', unsafe_allow_html=True)
