@@ -72,7 +72,7 @@ col1, col2 = st.columns(2)
 
 # ---------- LEFT HALF ----------
 with col1:
-    st.markdown('<div class="subheader">🚴 VR Cycling</div>', unsafe_allow_html=True)
+    st.markdown('<div class="subheader">🚴 VR Cycling ...</div>', unsafe_allow_html=True)
 
     paragraph_en = """This is a sample paragraph in English. 
     It represents the same content translated into different languages."""
