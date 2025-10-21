@@ -1,30 +1,37 @@
 import streamlit as st
+from PIL import Image
+import os
 
 # ------------------ PAGE SETTINGS ------------------
 st.set_page_config(layout="wide", page_title="Multilingual Page")
 
+# ------------------ IMAGE FILES ------------------
+# Make sure the images are in the 'images' folder
+background_image = "images/background.jpg"
+circle_image = "images/circle.png"
+
 # ------------------ CUSTOM CSS ------------------
-st.markdown("""
+st.markdown(f"""
     <style>
     /* Set background image with transparency overlay */
-    body {
+    body {{
         background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
-                          url("https://images.unsplash.com/photo-1529078155058-5d716f45d604?auto=format&fit=crop&w=1950&q=80");
+                          url("{background_image}");
         background-size: cover;
         background-position: center;
-    }
+    }}
 
     /* Rounded white box styling for each text section */
-    .box {
+    .box {{
         background-color: rgba(255, 255, 255, 0.8);
         padding: 20px 25px;
         border-radius: 15px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         margin-bottom: 20px;
-    }
+    }}
 
     /* Headings style */
-    .subheader {
+    .subheader {{
         font-size: 1.4rem;
         font-weight: 600;
         color: #222;
@@ -34,14 +41,14 @@ st.markdown("""
         text-align: center;
         margin-bottom: 15px;
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-    }
+    }}
 
     /* Center image */
-    .center-img {
+    .center-img {{
         display: flex;
         justify-content: center;
         align-items: center;
-    }
+    }}
     </style>
 """, unsafe_allow_html=True)
 
@@ -75,9 +82,6 @@ with col2:
     )
 
     st.markdown('<div class="center-img">', unsafe_allow_html=True)
-    st.image(
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Flag_of_Sri_Lanka.svg/1024px-Flag_of_Sri_Lanka.svg.png",
-        caption="Sri Lanka Flag",
-        use_container_width=True
-    )
+    img = Image.open(circle_image)
+    st.image(img, caption="Sri Lanka Flag", use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
