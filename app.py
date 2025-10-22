@@ -3,6 +3,7 @@ from PIL import Image
 import base64
 import threading
 import paho.mqtt.client as mqtt
+import time
 
 # ------------------ PAGE SETTINGS ------------------
 st.set_page_config(layout="wide", page_title="VR Cycling")
@@ -143,7 +144,7 @@ with col2:
             f'<div class="box"><b>VRcycling/UserA/GIncTime:</b> {mqtt_data["GIncTime"]}</div>',
             unsafe_allow_html=True
         )
-        st.sleep(1)
+        time.sleep(1)
 
 
     # st.markdown('<div class="center-img">', unsafe_allow_html=True)
