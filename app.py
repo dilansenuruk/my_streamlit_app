@@ -187,6 +187,7 @@ import paho.mqtt.client as mqtt
 import time
 import numpy as np
 import plotly.graph_objects as go
+from streamlit_autorefresh import st_autorefresh
 
 # ------------------ PAGE SETTINGS ------------------
 st.set_page_config(layout="wide", page_title="VR Cycling")
@@ -360,11 +361,13 @@ def plot_path(h_value, g_value):
     return fig
 
 # ------------------ DISPLAY LOOP ------------------
-while True:
-    h_value = int(np.clip(mqtt_data["HIncTime"], 0, 301))
-    g_value = int(np.clip(mqtt_data["GIncTime"], 0, 301))
+# Refresh every 1000 milliseconds (1 second)
+st_autorefresh(interval=1000, key="mqtt_refresh")
 
-    fig = plot_path(h_value, g_value)
-    plot_placeholder.plotly_chart(fig, use_container_width=True)
+# Read the latest MQTT data
+h_value = int(np.clip(mqtt_data["HIncTime"], 0, 301))
+g_value = int(np.clip(mqtt_data["GIncTime"], 0, 301))
 
-    time.sleep(1)
+# Plot the figure
+fig = plot_path(h_value, g_value)
+plot_placeholder.plotly_chart(fig, use_container_width=True)
