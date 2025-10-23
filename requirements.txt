@@ -3,3 +3,4 @@ paho-mqtt
 pillow
 plotly
 numpy
+streamlit_autorefresh
