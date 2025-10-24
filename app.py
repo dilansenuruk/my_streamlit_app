@@ -269,28 +269,43 @@ st.markdown(f"""
         text-align: center;
         margin-bottom: 15px;
     }}
-    .progress-bar {{
+
+    /* --- Progress bar and pointers --- */
+    .progress-container {{
         position: relative;
         width: 95%;
+        margin: 45px auto 30px auto;
+        height: 40px;
+    }}
+
+    .progress-bar {{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
         height: 14px;
         background: linear-gradient(90deg, #ddd, #ccc);
         border-radius: 7px;
-        margin: 35px auto 20px auto;
         overflow: hidden;
+        box-shadow: inset 0 2px 6px rgba(0,0,0,0.2);
     }}
+
     .pointer {{
         position: absolute;
-        top: -8px;
-        width: 24px;
-        height: 24px;
+        top: -15px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
         background-color: #3498db;
         transition: left 0.5s ease-in-out;
-        box-shadow: 0 0 8px rgba(0,0,0,0.3);
+        box-shadow: 0 0 10px rgba(0,0,0,0.4);
+        border: 3px solid white;
+        z-index: 10;
     }}
     .pointer2 {{
         background-color: #e74c3c;
+        z-index: 11;
     }}
+
     .value-box {{
         text-align: center;
         font-weight: 600;
@@ -305,6 +320,7 @@ st.markdown(f"""
     }}
     </style>
 """, unsafe_allow_html=True)
+
 
 # ------------------ PAGE TITLE ------------------
 st.markdown('<div class="main-title">🚴 VR Cycling — Live Tracking Dashboard</div>', unsafe_allow_html=True)
@@ -339,7 +355,8 @@ while True:
 
     html_content = f"""
     <div class="content-box" style="text-align:center;">
-        <div class="progress-bar">
+        <div class="progress-container">
+            <div class="progress-bar"></div>
             <div class="pointer" style="left:{h_pos}%;"></div>
             <div class="pointer pointer2" style="left:{g_pos}%;"></div>
         </div>
@@ -350,6 +367,7 @@ while True:
         </div>
     </div>
     """
+
 
     bar_placeholder.markdown(html_content, unsafe_allow_html=True)
     time.sleep(1)
