@@ -363,9 +363,9 @@ while True:
             <div class="pointer pointer2" style="left:{g_pos}%;"></div>
         </div>
         <div>
-            <span class="value-box" style="color:#3498db;">HIncTime: {h_value}</span>
+            <span class="value-box" style="color:#3498db;">Kandy: {(h_value / 301)*1000} m</span>
             &nbsp;&nbsp;
-            <span class="value-box" style="color:#e74c3c;">GIncTime: {g_value}</span>
+            <span class="value-box" style="color:#e74c3c;">Colombo: {(g_value / 301)*1000} m</span>
         </div>
     </div>
     """
