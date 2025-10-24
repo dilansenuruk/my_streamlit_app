@@ -206,7 +206,9 @@ USERNAME = "bikeuser"
 PASSWORD = "DYuKE42w8CoSDyb0HN46Blkk9XSfY8Z9zes6Ek6eA"
 TOPICS = [("VRcycling/UserA/HIncTime", 0), ("VRcycling/UserA/GIncTime", 0)]
 
-mqtt_data = {"HIncTime": 0, "GIncTime": 0}
+# Use session_state to persist values between reruns
+if "mqtt_data" not in st.session_state:
+    st.session_state.mqtt_data = {"HIncTime": 0, "GIncTime": 0}
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
@@ -221,11 +223,11 @@ def on_message(client, userdata, msg):
         value = int(payload)
         value = max(0, min(301, value))  # Clamp between 0–301
         if topic.endswith("HIncTime"):
-            mqtt_data["HIncTime"] = value
+            st.session_state.mqtt_data["HIncTime"] = value
         elif topic.endswith("GIncTime"):
-            mqtt_data["GIncTime"] = value
+            st.session_state.mqtt_data["GIncTime"] = value
     except ValueError:
-        pass  # Ignore non-numeric payloads
+        pass
 
 def mqtt_loop():
     client = mqtt.Client()
@@ -235,7 +237,11 @@ def mqtt_loop():
     client.connect(BROKER, PORT, 60)
     client.loop_forever()
 
-threading.Thread(target=mqtt_loop, daemon=True).start()
+# Start the MQTT thread once
+if "mqtt_thread_started" not in st.session_state:
+    threading.Thread(target=mqtt_loop, daemon=True).start()
+    st.session_state.mqtt_thread_started = True
+
 
 # ------------------ IMAGE FILES ------------------
 background_image_path = "images/background.jpg"
@@ -361,13 +367,16 @@ def plot_path(h_value, g_value):
     return fig
 
 # ------------------ DISPLAY LOOP ------------------
-# Refresh every 1000 milliseconds (1 second)
 st_autorefresh(interval=1000, key="mqtt_refresh")
 
-# Read the latest MQTT data
-h_value = int(np.clip(mqtt_data["HIncTime"], 0, 301))
-g_value = int(np.clip(mqtt_data["GIncTime"], 0, 301))
+# Get latest MQTT values from session_state
+h_value = int(np.clip(st.session_state.mqtt_data["HIncTime"], 0, 301))
+g_value = int(np.clip(st.session_state.mqtt_data["GIncTime"], 0, 301))
 
-# Plot the figure
+# If MQTT hasn't sent anything yet, keep them at start (index 0)
+if h_value == 0 and g_value == 0:
+    h_value, g_value = 0, 0
+
 fig = plot_path(h_value, g_value)
 plot_placeholder.plotly_chart(fig, use_container_width=True)
+
