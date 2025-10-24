@@ -184,7 +184,6 @@ from PIL import Image
 import base64
 import threading
 import paho.mqtt.client as mqtt
-import time
 import numpy as np
 import plotly.graph_objects as go
 from streamlit_autorefresh import st_autorefresh
@@ -197,7 +196,7 @@ def get_base64_of_bin_file(bin_file):
     """Convert local image file to base64 string"""
     with open(bin_file, "rb") as f:
         data = f.read()
-    return base64.b64encode(data).decode()
+    return base64.b64encode(f.read()).decode()
 
 # ------------------ MQTT CONFIGURATION ------------------
 BROKER = "18.140.19.253"
@@ -206,28 +205,30 @@ USERNAME = "bikeuser"
 PASSWORD = "DYuKE42w8CoSDyb0HN46Blkk9XSfY8Z9zes6Ek6eA"
 TOPICS = [("VRcycling/UserA/HIncTime", 0), ("VRcycling/UserA/GIncTime", 0)]
 
-# Use session_state to persist values between reruns
-if "mqtt_data" not in st.session_state:
-    st.session_state.mqtt_data = {"HIncTime": 0, "GIncTime": 0}
+# Global data container (thread-safe)
+mqtt_data = {"HIncTime": 0, "GIncTime": 0}
+mqtt_lock = threading.Lock()
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
+        print("✅ Connected to MQTT broker")
         client.subscribe(TOPICS)
     else:
-        print(f"Connection failed: {rc}")
+        print(f"❌ Connection failed with code {rc}")
 
 def on_message(client, userdata, msg):
     topic = msg.topic
     payload = msg.payload.decode("utf-8")
     try:
         value = int(payload)
-        value = max(0, min(301, value))  # Clamp between 0–301
-        if topic.endswith("HIncTime"):
-            st.session_state.mqtt_data["HIncTime"] = value
-        elif topic.endswith("GIncTime"):
-            st.session_state.mqtt_data["GIncTime"] = value
+        value = max(0, min(301, value))  # Clamp values between 0–301
+        with mqtt_lock:
+            if topic.endswith("HIncTime"):
+                mqtt_data["HIncTime"] = value
+            elif topic.endswith("GIncTime"):
+                mqtt_data["GIncTime"] = value
     except ValueError:
-        pass
+        pass  # ignore invalid payloads
 
 def mqtt_loop():
     client = mqtt.Client()
@@ -237,11 +238,11 @@ def mqtt_loop():
     client.connect(BROKER, PORT, 60)
     client.loop_forever()
 
-# Start the MQTT thread once
+# Start MQTT thread only once
 if "mqtt_thread_started" not in st.session_state:
-    threading.Thread(target=mqtt_loop, daemon=True).start()
+    t = threading.Thread(target=mqtt_loop, daemon=True)
+    t.start()
     st.session_state.mqtt_thread_started = True
-
 
 # ------------------ IMAGE FILES ------------------
 background_image_path = "images/background.jpg"
@@ -367,16 +368,19 @@ def plot_path(h_value, g_value):
     return fig
 
 # ------------------ DISPLAY LOOP ------------------
+# Refresh every 1000 milliseconds (1 second)
 st_autorefresh(interval=1000, key="mqtt_refresh")
 
-# Get latest MQTT values from session_state
-h_value = int(np.clip(st.session_state.mqtt_data["HIncTime"], 0, 301))
-g_value = int(np.clip(st.session_state.mqtt_data["GIncTime"], 0, 301))
+# Read latest MQTT data safely
+with mqtt_lock:
+    h_value = int(np.clip(mqtt_data["HIncTime"], 0, 301))
+    g_value = int(np.clip(mqtt_data["GIncTime"], 0, 301))
 
-# If MQTT hasn't sent anything yet, keep them at start (index 0)
+# Default to start if no values yet
 if h_value == 0 and g_value == 0:
     h_value, g_value = 0, 0
 
+# Plot figure
 fig = plot_path(h_value, g_value)
 plot_placeholder.plotly_chart(fig, use_container_width=True)
 
