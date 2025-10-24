@@ -275,25 +275,28 @@ st.markdown(f"""
         position: relative;
         width: 95%;
         margin: 45px auto 30px auto;
-        height: 40px;
+        height: 20px;
     }}
 
     .progress-bar {{
         position: absolute;
-        bottom: 0;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
         width: 100%;
-        height: 14px;
+        height: 10px;
         background: linear-gradient(90deg, #ddd, #ccc);
-        border-radius: 7px;
+        border-radius: 5px;
         overflow: hidden;
         box-shadow: inset 0 2px 6px rgba(0,0,0,0.2);
     }}
 
     .pointer {{
         position: absolute;
-        top: -15px;
-        width: 28px;
-        height: 28px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 22px;
+        height: 22px;
         border-radius: 50%;
         background-color: #3498db;
         transition: left 0.5s ease-in-out;
@@ -320,7 +323,6 @@ st.markdown(f"""
     }}
     </style>
 """, unsafe_allow_html=True)
-
 
 # ------------------ PAGE TITLE ------------------
 st.markdown('<div class="main-title">🚴 VR Cycling — Live Tracking Dashboard</div>', unsafe_allow_html=True)
@@ -367,6 +369,7 @@ while True:
         </div>
     </div>
     """
+
 
 
     bar_placeholder.markdown(html_content, unsafe_allow_html=True)
