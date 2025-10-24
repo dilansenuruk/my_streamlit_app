@@ -196,7 +196,7 @@ def get_base64_of_bin_file(bin_file):
     """Convert local image file to base64 string"""
     with open(bin_file, "rb") as f:
         data = f.read()
-    return base64.b64encode(f.read()).decode()
+    return base64.b64encode(data).decode()
 
 # ------------------ MQTT CONFIGURATION ------------------
 BROKER = "18.140.19.253"
