@@ -180,28 +180,75 @@ with col1:
 #     st.markdown('<div class="subheader">📊 Real-time MQTT Visual</div>', unsafe_allow_html=True)
 #     bar_placeholder = st.empty()
 
+# # ---------- NEW RIGHT COLUMN ----------
+# with col2:
+#     st.markdown('<div class="subheader">🗺️ Live Route — Nuwara Eliya</div>', unsafe_allow_html=True)
+#     map_placeholder = st.empty()
+
+# # ------------------ NEW DISPLAY LOOP ------------------
+# while True:
+#     h_value = mqtt_data["HIncTime"]
+#     g_value = mqtt_data["GIncTime"]
+
+#     # Clip values safely
+#     h_idx = max(0, min(h_value, len(path_coords)-1))
+#     g_idx = max(0, min(g_value, len(path_coords)-1))
+
+#     # Get coordinates
+#     h_lat, h_lon = path_coords[h_idx]
+#     g_lat, g_lon = path_coords[g_idx]
+
+#     # Center map at rider A - feel free to change
+#     m = folium.Map(location=[h_lat, h_lon], zoom_start=17)
+
+#     # Rider A marker (Blue)
+#     folium.CircleMarker(
+#         location=[h_lat, h_lon],
+#         radius=8,
+#         popup=f"Rider A — {h_idx} / 301",
+#         color="blue",
+#         fill=True,
+#         fill_opacity=0.9
+#     ).add_to(m)
+
+#     # Rider B marker (Red)
+#     folium.CircleMarker(
+#         location=[g_lat, g_lon],
+#         radius=8,
+#         popup=f"Rider B — {g_idx} / 301",
+#         color="red",
+#         fill=True,
+#         fill_opacity=0.9
+#     ).add_to(m)
+
+#     # Draw path polyline
+#     folium.PolyLine(path_coords, weight=4).add_to(m)
+
+#     # Show map
+#     with col2:
+#         map_placeholder = st_folium(m, width=750, height=450, key="main_map")
+
+#     time.sleep(1)
+
 # ---------- NEW RIGHT COLUMN ----------
 with col2:
     st.markdown('<div class="subheader">🗺️ Live Route — Nuwara Eliya</div>', unsafe_allow_html=True)
     map_placeholder = st.empty()
 
 # ------------------ NEW DISPLAY LOOP ------------------
-while True:
+for _ in range(3600):
     h_value = mqtt_data["HIncTime"]
     g_value = mqtt_data["GIncTime"]
 
-    # Clip values safely
     h_idx = max(0, min(h_value, len(path_coords)-1))
     g_idx = max(0, min(g_value, len(path_coords)-1))
 
-    # Get coordinates
     h_lat, h_lon = path_coords[h_idx]
     g_lat, g_lon = path_coords[g_idx]
 
-    # Center map at rider A - feel free to change
+    # Create the map dynamically
     m = folium.Map(location=[h_lat, h_lon], zoom_start=17)
 
-    # Rider A marker (Blue)
     folium.CircleMarker(
         location=[h_lat, h_lon],
         radius=8,
@@ -211,7 +258,6 @@ while True:
         fill_opacity=0.9
     ).add_to(m)
 
-    # Rider B marker (Red)
     folium.CircleMarker(
         location=[g_lat, g_lon],
         radius=8,
@@ -221,14 +267,16 @@ while True:
         fill_opacity=0.9
     ).add_to(m)
 
-    # Draw path polyline
     folium.PolyLine(path_coords, weight=4).add_to(m)
 
-    # Show map
+    # Update same placeholder (no duplicate key)
     with col2:
+        map_placeholder.empty()  # clear old one
         map_placeholder = st_folium(m, width=750, height=450, key="main_map")
 
     time.sleep(1)
+    st.experimental_rerun()
+
 
 
 
