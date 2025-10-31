@@ -226,7 +226,7 @@ while True:
 
     # Show map
     with col2:
-        map_placeholder = st_folium(m, width=500, height=450)
+        map_placeholder = st_folium(m, width=500, height=450, key="main_map")
 
     time.sleep(1)
 
