@@ -240,15 +240,18 @@ for _ in range(3600):
     h_value = mqtt_data["HIncTime"]
     g_value = mqtt_data["GIncTime"]
 
-    h_idx = max(0, min(h_value, len(path_coords)-1))
-    g_idx = max(0, min(g_value, len(path_coords)-1))
+    # Clip values safely
+    h_idx = max(0, min(h_value, len(path_coords) - 1))
+    g_idx = max(0, min(g_value, len(path_coords) - 1))
 
+    # Get coordinates
     h_lat, h_lon = path_coords[h_idx]
     g_lat, g_lon = path_coords[g_idx]
 
-    # Create the map dynamically
+    # Center map at rider A
     m = folium.Map(location=[h_lat, h_lon], zoom_start=17)
 
+    # Rider A marker (Blue)
     folium.CircleMarker(
         location=[h_lat, h_lon],
         radius=8,
@@ -258,6 +261,7 @@ for _ in range(3600):
         fill_opacity=0.9
     ).add_to(m)
 
+    # Rider B marker (Red)
     folium.CircleMarker(
         location=[g_lat, g_lon],
         radius=8,
@@ -267,12 +271,12 @@ for _ in range(3600):
         fill_opacity=0.9
     ).add_to(m)
 
+    # Path line
     folium.PolyLine(path_coords, weight=4).add_to(m)
 
-    # Update same placeholder (no duplicate key)
-    with col2:
-        map_placeholder.empty()  # clear old one
-        map_placeholder = st_folium(m, width=750, height=450, key="main_map")
+    # ✅ Update inside placeholder
+    with map_placeholder.container():
+        st_folium(m, width=750, height=450, key="main_map")
 
     time.sleep(1)
 
