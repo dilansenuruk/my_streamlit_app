@@ -275,7 +275,6 @@ for _ in range(3600):
         map_placeholder = st_folium(m, width=750, height=450, key="main_map")
 
     time.sleep(1)
-    st.experimental_rerun()
 
 
 
