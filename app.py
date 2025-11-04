@@ -1146,7 +1146,19 @@ while True:
     folium.PolyLine(path_coords, weight=4).add_to(m)
 
     with map_placeholder:
-        st_folium(m, width=450, height=450, returned_objects=[])
+        if "map_key" not in st.session_state:
+            st.session_state.map_key = 0
+
+        st.session_state.map_key += 1
+
+        st_folium(
+            m,
+            width=450,
+            height=450,
+            returned_objects=[],
+            key=f"map_{st.session_state.map_key}"
+        )
+
 
     time.sleep(1)
 
