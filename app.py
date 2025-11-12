@@ -205,7 +205,7 @@ while True:
 
         st_folium(
             m,
-            width=650,
+            width=750,
             height=450,
             returned_objects=[],
             key=f"map_{st.session_state.map_key}"
