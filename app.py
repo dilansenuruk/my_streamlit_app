@@ -192,7 +192,7 @@ while True:
     h_lat, h_lon = path_coords[h_idx]
     g_lat, g_lon = path_coords[g_idx]
 
-    m = folium.Map(location=[6.953399599775896, 80.78392973728708], zoom_start=16.5)
+    m = folium.Map(location=[6.953399599775896, 80.78392973728708], zoom_start=16)
     folium.CircleMarker([h_lat, h_lon], radius=8, color="blue", fill=True).add_to(m)
     folium.CircleMarker([g_lat, g_lon], radius=8, color="red", fill=True).add_to(m)
     folium.PolyLine(path_coords, weight=4).add_to(m)
