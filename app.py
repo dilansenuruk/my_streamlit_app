@@ -211,4 +211,4 @@ while True:
             key=f"map_{st.session_state.map_key}"
         )
 
-    time.sleep(1)
+    time.sleep(5)
