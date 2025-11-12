@@ -9,7 +9,7 @@ import time
 import pandas as pd
 import folium
 from streamlit_folium import st_folium
-from streamlit_autorefresh import st_autorefresh
+# from streamlit_autorefresh import st_autorefresh
 
 # Load path points
 df = pd.read_csv("interpolated_path.csv")
