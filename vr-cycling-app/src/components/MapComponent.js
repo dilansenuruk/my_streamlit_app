@@ -9,7 +9,7 @@ function DeviceMarkers({ devices }) {
 
   return (
     <>
-      {/* Device H (Blue) */}
+      {/* Colombo (Blue) */}
       <CircleMarker
         center={devices.deviceH.position}
         radius={12}
@@ -33,7 +33,7 @@ function DeviceMarkers({ devices }) {
         </Popup>
       </CircleMarker>
 
-      {/* Device G (Red) */}
+      {/* Kandy (Red) */}
       <CircleMarker
         center={devices.deviceG.position}
         radius={12}

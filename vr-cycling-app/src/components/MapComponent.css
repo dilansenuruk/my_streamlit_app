@@ -10,6 +10,16 @@
   border-radius: 20px;
 }
 
+/* Reduce map tile opacity for better path visibility */
+.map-wrapper .leaflet-tile-pane {
+  opacity: 0.5;
+}
+
+/* Keep path and markers at full opacity */
+.map-wrapper .leaflet-overlay-pane {
+  opacity: 1;
+}
+
 .popup-content {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 5px;

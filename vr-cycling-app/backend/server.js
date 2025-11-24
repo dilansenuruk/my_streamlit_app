@@ -13,12 +13,12 @@ app.use(express.json());
 const BROKER = 'mqtt://18.140.19.253:8090';
 const USERNAME = 'bikeuser';
 const PASSWORD = 'DYuKE42w8CoSDyb0HN46Blkk9XSfY8Z9zes6Ek6eA';
-const TOPICS = ['VRcycling/UserA/HIncTime', 'VRcycling/UserA/GIncTime'];
+const TOPICS = ['VRcycling/UserA/HIncTime', 'VRcycling/UserA/TIncTime'];
 
 // Store device positions
 let devicePositions = {
   HIncTime: 0,
-  GIncTime: 0
+  TIncTime: 0
 };
 
 // Store path coordinates
@@ -62,8 +62,8 @@ client.on('message', (topic, message) => {
     
     if (topic.endsWith('HIncTime')) {
       devicePositions.HIncTime = clampedValue;
-    } else if (topic.endsWith('GIncTime')) {
-      devicePositions.GIncTime = clampedValue;
+    } else if (topic.endsWith('TIncTime')) {
+      devicePositions.TIncTime = clampedValue;
     }
     
     console.log(`Updated ${topic}: ${clampedValue}`);
@@ -83,20 +83,20 @@ app.get('/api/path', (req, res) => {
 
 app.get('/api/devices', (req, res) => {
   const h_idx = Math.max(0, Math.min(devicePositions.HIncTime, pathCoords.length - 1));
-  const g_idx = Math.max(0, Math.min(devicePositions.GIncTime, pathCoords.length - 1));
+  const t_idx = Math.max(0, Math.min(devicePositions.TIncTime, pathCoords.length - 1));
   
   const devices = {
     deviceH: {
       position: pathCoords[h_idx] || [6.953399599775896, 80.78392973728708],
       index: devicePositions.HIncTime,
       color: 'blue',
-      name: 'Device H'
+      name: 'Colombo'
     },
     deviceG: {
-      position: pathCoords[g_idx] || [6.953399599775896, 80.78392973728708],
-      index: devicePositions.GIncTime,
+      position: pathCoords[t_idx] || [6.953399599775896, 80.78392973728708],
+      index: devicePositions.TIncTime,
       color: 'red',
-      name: 'Device G'
+      name: 'Kandy'
     }
   };
   
