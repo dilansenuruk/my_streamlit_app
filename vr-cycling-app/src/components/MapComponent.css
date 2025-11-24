@@ -12,7 +12,7 @@
 
 /* Reduce map tile opacity for better path visibility */
 .map-wrapper .leaflet-tile-pane {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 /* Keep path and markers at full opacity */

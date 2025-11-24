@@ -16,8 +16,8 @@ function DeviceMarkers({ devices }) {
         pathOptions={{
           color: '#3498db',
           fillColor: '#3498db',
-          fillOpacity: 0.8,
-          weight: 3
+          fillOpacity: 0.9,
+          weight: 2
         }}
       >
         <Popup>
@@ -40,8 +40,8 @@ function DeviceMarkers({ devices }) {
         pathOptions={{
           color: '#e74c3c',
           fillColor: '#e74c3c',
-          fillOpacity: 0.8,
-          weight: 3
+          fillOpacity: 0.9,
+          weight: 2
         }}
       >
         <Popup>
@@ -99,7 +99,7 @@ function MapComponent({ devices, pathData }) {
           <Polyline
             positions={pathData}
             pathOptions={{
-              color: '#FF6B35',
+              color: '#3887d0ff',
               weight: 6,
               opacity: 0.9,
               lineCap: 'round',
