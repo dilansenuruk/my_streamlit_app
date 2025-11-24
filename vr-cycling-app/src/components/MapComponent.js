@@ -60,19 +60,19 @@ function DeviceMarkers({ devices }) {
   );
 }
 
-// Component to handle map centering
-function MapController({ devices }) {
+// Component to handle map centering and auto-zoom to fit path
+function MapController({ pathData }) {
   const map = useMap();
-  const initialCenterSet = useRef(false);
+  const initialFitDone = useRef(false);
 
   useEffect(() => {
-    if (devices && !initialCenterSet.current) {
-      // Center map on initial device position
-      const center = devices.deviceH.position;
-      map.setView(center, 16);
-      initialCenterSet.current = true;
+    if (pathData.length > 0 && !initialFitDone.current) {
+      // Auto-zoom to fit the entire path with some padding
+      const bounds = pathData.map(coord => [coord[0], coord[1]]);
+      map.fitBounds(bounds, { padding: [50, 50] });
+      initialFitDone.current = true;
     }
-  }, [devices, map]);
+  }, [pathData, map]);
 
   return null;
 }
@@ -94,14 +94,16 @@ function MapComponent({ devices, pathData }) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         
-        {/* Draw the path */}
+        {/* Draw the path - Now more prominent */}
         {pathData.length > 0 && (
           <Polyline
             positions={pathData}
             pathOptions={{
-              color: '#2ecc71',
-              weight: 4,
-              opacity: 0.7
+              color: '#FF6B35',
+              weight: 6,
+              opacity: 0.9,
+              lineCap: 'round',
+              lineJoin: 'round'
             }}
           />
         )}
@@ -109,8 +111,8 @@ function MapComponent({ devices, pathData }) {
         {/* Render device markers */}
         <DeviceMarkers devices={devices} />
         
-        {/* Map controller */}
-        <MapController devices={devices} />
+        {/* Map controller - auto-zoom to path */}
+        <MapController pathData={pathData} />
       </MapContainer>
     </div>
   );
