@@ -32,8 +32,8 @@ function App() {
   return (
     <div className="App">
       <div className="header">
-        <h1>🚴 VR Cycling — Live Tracking Dashboard</h1>
-        <p className="subtitle">Real-time Device Tracking on Nuwara Eliya Route</p>
+        <h1>🚴 Get the VR Cycling Experience </h1>
+        <p className="subtitle">Ride Freely on Nuwara Eliya Route</p>
       </div>
       
       <div className="main-container">
