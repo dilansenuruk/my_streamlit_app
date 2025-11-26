@@ -1,3 +1,4 @@
+/* Social Media Post Style */
 .info-panel {
   display: flex;
   flex-direction: column;
@@ -5,156 +6,120 @@
 }
 
 .info-section {
-  /* background: rgb(255, 255, 255); */
-  background: rgba(253, 185, 52, 0.9);
-  border-radius: 15px;
-  /* padding: 25px; */
-  padding: 18px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #EE3E80 0%, #C40D42 100%);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 30px rgba(196, 13, 66, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Social media decorative elements */
+.info-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 200px;
+  height: 200px;
+  background: rgba(253, 185, 52, 0.2);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.info-section::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 150px;
+  height: 150px;
+  background: rgba(247, 148, 30, 0.2);
+  border-radius: 50%;
+  z-index: 0;
 }
 
 .section-title {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin-bottom: 20px;
-  color: #2c3e50;
-  font-weight: 600;
+  color: #ffffff;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .info-card {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   padding: 20px;
   border-radius: 15px;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  border-left: 4px solid #FDB934;
 }
 
 .info-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border-left-color: #F7941E;
 }
 
 .info-card h3 {
-  color: #34495e;
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-  font-weight: 600;
+  color: #C40D42;
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-card h3::before {
+  content: '🌐';
+  font-size: 1.3rem;
 }
 
 .info-card p {
-  color: #555;
-  line-height: 1.6;
-  font-size: 0.95rem;
+  color: #63717A;
+  line-height: 1.8;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
-.device-status {
-  flex: 1;
-}
-
-.device-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  padding: 20px;
-  border-radius: 15px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border-left: 5px solid;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.device-card:hover {
-  transform: translateX(5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.device-card.device-h {
-  border-left-color: #3498db;
-}
-
-.device-card.device-g {
-  border-left-color: #e74c3c;
-}
-
-.device-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 15px;
-}
-
-.device-icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.device-header h3 {
-  color: #2c3e50;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.device-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.stat {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 12px;
-  background: rgba(0, 0, 0, 0.03);
-  border-radius: 8px;
-}
-
-.stat-label {
-  color: #7f8c8d;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.stat-value {
-  color: #2c3e50;
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 12px;
-  background: #ecf0f1;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.progress-fill {
-  height: 100%;
-  transition: width 0.5s ease-in-out;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
+/* Loading state with theme */
 .loading {
   text-align: center;
   padding: 30px;
-  color: #7f8c8d;
+  color: #ffffff;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
 }
 
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .info-section {
     padding: 20px;
   }
   
   .section-title {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
   
-  .device-card {
+  .info-card {
     padding: 15px;
+  }
+  
+  .info-card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .info-card p {
+    font-size: 0.95rem;
   }
 }

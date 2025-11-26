@@ -1,7 +1,9 @@
+/* Social Media Style Map Wrapper */
 .map-wrapper {
   height: 100%;
   width: 100%;
-  min-height: 600px;
+  min-height: 400px;
+  position: relative;
 }
 
 .map-wrapper .leaflet-container {
@@ -12,7 +14,7 @@
 
 /* Reduce map tile opacity for better path visibility */
 .map-wrapper .leaflet-tile-pane {
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 /* Keep path and markers at full opacity */
@@ -20,25 +22,31 @@
   opacity: 1;
 }
 
+/* Social Media Style Popup */
 .popup-content {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding: 5px;
+  padding: 8px;
 }
 
 .popup-content strong {
-  color: #2c3e50;
-  font-size: 1.1rem;
+  color: #C40D42;
+  font-size: 1.2rem;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  font-weight: 700;
 }
 
 .leaflet-popup-content-wrapper {
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 6px 25px rgba(196, 13, 66, 0.3);
+  border: 2px solid #FDB934;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
 }
 
 .leaflet-popup-tip {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  border-left: 2px solid #FDB934;
+  border-bottom: 2px solid #FDB934;
 }
 
 /* Smooth transitions for markers */
@@ -47,16 +55,45 @@
   transition: all 0.5s ease-in-out;
 }
 
-/* Custom zoom control styling */
+/* Social Media Style Zoom Controls */
 .leaflet-control-zoom {
-  border-radius: 8px !important;
+  border-radius: 12px !important;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 4px 20px rgba(102, 137, 171, 0.4) !important;
+  border: none !important;
 }
 
 .leaflet-control-zoom a {
-  width: 35px !important;
-  height: 35px !important;
-  line-height: 35px !important;
-  font-size: 20px !important;
+  width: 40px !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  font-size: 22px !important;
+  color: #C40D42 !important;
+  background: linear-gradient(135deg, #ffffff 0%, #BACAD3 100%) !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: linear-gradient(135deg, #FDB934 0%, #F7941E 100%) !important;
+  color: white !important;
+  transform: scale(1.1);
+}
+
+.leaflet-control-zoom a:first-child {
+  border-bottom: 2px solid #F26664 !important;
+}
+
+/* Add animation to path */
+@keyframes pathPulse {
+  0%, 100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.map-wrapper .leaflet-overlay-pane path {
+  animation: pathPulse 3s ease-in-out infinite;
 }
