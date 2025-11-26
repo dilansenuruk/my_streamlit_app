@@ -6,8 +6,9 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: rgba(255, 255, 255, 0.8);;
-  /*background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);previous color*/
+  /* background: rgba(255, 255, 255, 0.8);; */
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); previous color */
+  background: linear-gradient(135deg, #e3e4ea 0%, #ffffff 100%);
   min-height: 100vh;
 }
 
@@ -21,7 +22,7 @@ body {
   color: white;
   margin-bottom: 20px;
   /* background: rgba(0, 0, 0, 0.3); */
-  background: rgba(247, 30, 30, 0.8);
+  background: rgba(196, 13, 66, 0.8);
   padding: 20px 15px;
   border-radius: 15px;
   backdrop-filter: blur(10px);
@@ -73,7 +74,8 @@ body {
 
 /* Map Legend Styles */
 .map-legend {
-  background: rgb(255, 134, 94);
+  /* background: rgb(255, 255, 255); */
+  background: rgba(253, 185, 52, 0.9);
   border-radius: 15px;
   padding: 15px 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);

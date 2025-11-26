@@ -5,7 +5,8 @@
 }
 
 .info-section {
-  background: rgb(255, 134, 94);
+  /* background: rgb(255, 255, 255); */
+  background: rgba(253, 185, 52, 0.9);
   border-radius: 15px;
   /* padding: 25px; */
   padding: 18px;
