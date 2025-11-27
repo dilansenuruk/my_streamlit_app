@@ -94,7 +94,7 @@ function MapComponent({ devices, pathData }) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         
-        {/* Draw the path - Now more prominent */}
+        {/* Draw the path - more prominent */}
         {pathData.length > 0 && (
           <Polyline
             positions={pathData}

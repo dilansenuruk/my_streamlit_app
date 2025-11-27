@@ -1,4 +1,4 @@
-/* Social Media Post Style */
+/* Style like a Social Media Post */
 .info-panel {
   display: flex;
   flex-direction: column;
@@ -6,10 +6,12 @@
 }
 
 .info-section {
-  background: linear-gradient(135deg, #EE3E80 0%, #C40D42 100%);
+  background: linear-gradient(135deg, rgba(238, 62, 128, 0.95) 0%, rgba(196, 13, 66, 0.95) 100%);
   border-radius: 20px;
   padding: 25px;
-  box-shadow: 0 8px 30px rgba(196, 13, 66, 0.3);
+  box-shadow: 0 10px 40px rgba(196, 13, 66, 0.5);
+  border: 2px solid rgba(253, 185, 52, 0.4);
+  backdrop-filter: blur(15px);
   position: relative;
   overflow: hidden;
 }
@@ -41,6 +43,7 @@
 
 .section-title {
   font-size: 1.8rem;
+  font-family: 'Axiata Bold', sans-serif;
   margin-bottom: 20px;
   color: #ffffff;
   font-weight: 700;
@@ -69,6 +72,7 @@
 }
 
 .info-card h3 {
+  font-family: 'Axiata Bold', sans-serif;
   color: #C40D42;
   margin-bottom: 12px;
   font-size: 1.2rem;
@@ -84,6 +88,7 @@
 }
 
 .info-card p {
+  font-family: 'Axiata Book', sans-serif;
   color: #63717A;
   line-height: 1.8;
   font-size: 1rem;

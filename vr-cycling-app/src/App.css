@@ -1,3 +1,25 @@
+/* Import Axiata Fonts */
+@font-face {
+  font-family: 'Axiata Book';
+  src: url('./fonts/Axiata Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Axiata Medium';
+  src: url('./fonts/Axiata Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Axiata Bold';
+  src: url('./fonts/Axiata Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,13 +29,32 @@
 body {
   /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
   font-family: 'Axiata Book','Axiata Medium', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #BACAD3 0%, #f0f4f7 100%);
+  background-image: url('./img/backPanel.tif');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(2px);
+  z-index: -1;
 }
 
 .App {
   min-height: 100vh;
   padding: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Social Media Post Header */
@@ -21,11 +62,12 @@ body {
   text-align: center;
   color: white;
   margin-bottom: 25px;
-  background: linear-gradient(135deg, #7B1B67 0%, #C40D42 100%);
+  background: linear-gradient(135deg, rgba(123, 27, 103, 0.95) 0%, rgba(196, 13, 66, 0.95) 100%);
   padding: 25px 20px;
   border-radius: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 40px rgba(123, 27, 103, 0.4);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 10px 40px rgba(123, 27, 103, 0.6);
+  border: 2px solid rgba(253, 185, 52, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -65,6 +107,7 @@ body {
 }
 
 .subtitle {
+  font-family: 'Axiata Book', sans-serif;
   font-size: 1.2rem;
   opacity: 0.95;
   font-weight: 400;
@@ -97,10 +140,10 @@ body {
 .map-container {
   background: white;
   border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
   overflow: hidden;
-  height: 500px;
-  min-height: 400px;
+  height: 420px;
+  min-height: 350px;
   border: 3px solid #F26664;
   position: relative;
 }
@@ -122,10 +165,12 @@ body {
 
 /* Social Media Legend Card */
 .map-legend {
-  background: linear-gradient(135deg, #6689AB 0%, #63717A 100%);
+  background: linear-gradient(135deg, rgba(102, 137, 171, 0.95) 0%, rgba(99, 113, 122, 0.95) 100%);
   border-radius: 15px;
   padding: 15px 20px;
-  box-shadow: 0 8px 25px rgba(102, 137, 171, 0.3);
+  box-shadow: 0 10px 30px rgba(102, 137, 171, 0.5);
+  border: 2px solid rgba(186, 202, 211, 0.4);
+  backdrop-filter: blur(15px);
   position: relative;
   overflow: hidden;
 }

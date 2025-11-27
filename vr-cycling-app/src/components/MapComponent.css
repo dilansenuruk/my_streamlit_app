@@ -24,11 +24,12 @@
 
 /* Social Media Style Popup */
 .popup-content {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Axiata Book', sans-serif;
   padding: 8px;
 }
 
 .popup-content strong {
+  font-family: 'Axiata Bold', sans-serif;
   color: #C40D42;
   font-size: 1.2rem;
   display: block;
